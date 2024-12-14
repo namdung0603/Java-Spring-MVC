@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
+    private UserServices userServices;
+
+    public UserController(UserServices userServices) {
+        this.userServices = userServices;
+    }
+
     @RequestMapping("/")
     public String getHomePage() {
-        return "eric.html";
+        return "hello";
     }
 }
 
