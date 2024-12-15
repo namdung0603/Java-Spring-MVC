@@ -19,12 +19,12 @@ public class UserController {
         this.userServices = userServices;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/admin/user")
     public String getHomePage(Model model) {
         String test = this.userServices.handleHello();
         model.addAttribute("eric", test);
         model.addAttribute("hoidanit", "from controller with model");
-        return "hello";
+        return "/admin/user/create";
     }
 }
 
