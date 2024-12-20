@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.UserServices;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
 
-    private UserServices userServices;
+    private final UserServices userServices;
 
     public UserController(UserServices userServices) {
         this.userServices = userServices;
@@ -31,6 +32,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUser(Model model, @ModelAttribute("newUser") User hoidanit) {
         System.out.println("Run here" + hoidanit);
+        this.userServices.handleSaveUser(hoidanit);
         return "hello";
     }
 }
