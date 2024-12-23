@@ -30,4 +30,8 @@ public class UserServices {
     public User handleSaveUser(User hoidanit) {
         return this.userRepository.save(hoidanit);
     }
+
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
 }

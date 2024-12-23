@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UserController {
@@ -44,9 +46,32 @@ public class UserController {
 
     @RequestMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
-        System.out.println("Check path id: " + id);
+        // System.out.println("Check path id: " + id);
+        User user = this.userServices.getUserById(id);
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "/admin/user/show";
+    }
+
+    @RequestMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userServices.getUserById(id);
+        model.addAttribute("newUser", currentUser);
+        return "/admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(@ModelAttribute("newUser") User hoidanit) {
+        User current = this.userServices.getUserById(hoidanit.getId());
+        if (current != null) {
+            current.setFullName(hoidanit.getFullName());
+            current.setAddress(hoidanit.getAddress());
+            current.setPhone(hoidanit.getPhone());
+
+            this.userServices.handleSaveUser(current);
+        }
+
+        return "redirect:/admin/user";
     }
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.GET)
