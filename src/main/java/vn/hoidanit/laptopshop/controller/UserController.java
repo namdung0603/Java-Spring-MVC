@@ -85,6 +85,28 @@ public class UserController {
         this.userServices.handleSaveUser(hoidanit);
         return "redirect:/admin/user";
     }
+
+    @RequestMapping("/admin/user/delete/{id}")
+    public String getDeleteUser(Model model, @PathVariable long id) {
+        // User user = new User();
+        // user.setId(id);
+        // model.addAttribute("newUser", user);
+        model.addAttribute("id", id);
+        model.addAttribute("newUser", new User());
+        return "/admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("newUser") User eric) {
+        this.userServices.deleteAUser(eric.getId());
+        return "redirect:/admin/user";
+    }
+    // @PostMapping("/admin/user/delete")
+    // public String postDeleteUser(@PathVariable long id) {
+    // this.userServices.deleteAUser(id);
+    // return "redirect:/admin/user";
+    // }
+
 }
 
 // @RestController

@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-12 mx-auto">
                             <h2>Update a user</h2>
                             <hr>
-                            <form:form action="" method="post" modelAttribute="newUser">
+                            <form:form action="/admin/user/update" method="post" modelAttribute="newUser">
                                 <!-- Id -->
                                 <div class="mb-3" style="display: none;">
                                     <label for="id" class="form-label">ID</label>
